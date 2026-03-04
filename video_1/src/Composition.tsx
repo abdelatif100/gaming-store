@@ -1,3 +1,3 @@
-export const MyComposition = () => {
-  return null;
-};
+import { PromoVideo } from "./PromoVideo/Main";
+
+export const MyComposition = PromoVideo;
