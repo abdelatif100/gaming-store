@@ -1,5 +1,5 @@
 import React from 'react';
-import { interpolate, spring, useCurrentFrame, useVideoConfig, AbsoluteFill, random } from 'remotion';
+import { interpolate, spring, useCurrentFrame, useVideoConfig, AbsoluteFill, random, Img } from 'remotion';
 import { fontFamily } from './Fonts';
 
 export const Scene4: React.FC = () => {
@@ -27,6 +27,10 @@ export const Scene4: React.FC = () => {
 	});
 
 	const strobe = frame > 0 && frame < 10 && frame % 2 === 0 ? 1 : 0;
+	
+	const imageOpacity = interpolate(frame, [0, 20], [0, 0.6], {
+		extrapolateRight: 'clamp',
+	});
 
 	return (
 		<AbsoluteFill
@@ -39,6 +43,17 @@ export const Scene4: React.FC = () => {
 				transform: `scale(${scale * drift}) translate(${shakeX}px, ${shakeY}px)`,
 			}}
 		>
+			<Img
+				src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=1920&q=80"
+				style={{
+					position: 'absolute',
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+					opacity: imageOpacity,
+					filter: 'grayscale(100%) contrast(150%) brightness(30%)',
+				}}
+			/>
 			<div
 				style={{
 					fontFamily,
@@ -50,6 +65,7 @@ export const Scene4: React.FC = () => {
 					direction: 'rtl',
 					marginBottom: 20,
 					opacity: slam,
+					zIndex: 1,
 				}}
 			>
 				1 ساعة = 200 دج
@@ -58,7 +74,7 @@ export const Scene4: React.FC = () => {
 				style={{
 					fontFamily,
 					fontSize: 350,
-					fontWeight: 900,
+					fontWeight: 800,
 					color: '#FFFFFF',
 					textAlign: 'center',
 					textShadow: '0 0 50px #8A2BE2, 0 0 100px #8A2BE2, 0 0 150px #8A2BE2',
@@ -69,6 +85,7 @@ export const Scene4: React.FC = () => {
 					WebkitTextFillColor: 'transparent',
 					filter: 'drop-shadow(0 0 30px rgba(138, 43, 226, 1))',
 					transform: `scale(${interpolate(slam, [0.8, 1], [1.5, 1], {extrapolateLeft: 'clamp'})})`,
+					zIndex: 1,
 				}}
 			>
 				فقط
@@ -78,6 +95,7 @@ export const Scene4: React.FC = () => {
 					style={{
 						backgroundColor: 'white',
 						opacity: 0.8,
+						zIndex: 2,
 					}}
 				/>
 			)}

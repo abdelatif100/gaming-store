@@ -1,5 +1,5 @@
 import React from 'react';
-import { interpolate, useCurrentFrame, AbsoluteFill, Easing } from 'remotion';
+import { interpolate, useCurrentFrame, AbsoluteFill, Easing, Img } from 'remotion';
 import { fontFamily } from './Fonts';
 
 export const Scene3: React.FC = () => {
@@ -16,6 +16,10 @@ export const Scene3: React.FC = () => {
 		[-1, 1],
 		[1, 1.05]
 	);
+	
+	const imageOpacity = interpolate(frame, [0, 20], [0, 0.4], {
+		extrapolateRight: 'clamp',
+	});
 
 	return (
 		<AbsoluteFill
@@ -27,11 +31,22 @@ export const Scene3: React.FC = () => {
 				transform: `rotate(${tilt}deg) scale(${pulse})`,
 			}}
 		>
+			<Img
+				src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1920&q=80"
+				style={{
+					position: 'absolute',
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+					opacity: imageOpacity,
+					filter: 'grayscale(100%) contrast(150%) brightness(50%)',
+				}}
+			/>
 			<div
 				style={{
 					fontFamily,
 					fontSize: 140,
-					fontWeight: 900,
+					fontWeight: 800,
 					color: '#00F5FF',
 					textAlign: 'center',
 					textShadow: '0 0 30px #00F5FF',
@@ -39,6 +54,7 @@ export const Scene3: React.FC = () => {
 					position: 'relative',
 					overflow: 'hidden',
 					padding: '20px 60px',
+					zIndex: 1,
 				}}
 			>
 				30 دقيقة = 100 دج
